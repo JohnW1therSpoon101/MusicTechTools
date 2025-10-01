@@ -1,11 +1,11 @@
 Instructions..
 
-I want you to take the yt2audio.py and and break it off into the necessary projects 
-Include any additions that are presented in the project instructions
+This is a project that was origionally a part of a different root file name. I have changed it to look something like this. 
+edit the code accordingly. 
 
 Updated Directory: ( Follow this for reference when it comes to the building blocks of the project) 
 
-yt2aws (Main folder);
+link2aws (Main folder);
 - check.py 
 - start.py
 - getlink.py 
