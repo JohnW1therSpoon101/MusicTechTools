@@ -8,7 +8,7 @@ Updated Directory: ( Follow this for reference when it comes to the building blo
 yt2aws (Main folder);
 - check.py 
 - start.py
-- getlink.py //disregard for now//
+- getlink.py 
 - complete.py
 - getlink.py 
 - - methods (folder)
