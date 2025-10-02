@@ -14,15 +14,17 @@ link2aws (Main folder);
 - - methods (folder)
 - - - youtube (folder)
 - - - - method1.py = yt_dlp method
-- - - - method2.py = selemium download method 
+- - - - method2.py = 
+- - - - method3.py = selenium method (disregard for now)
 - - - instagram (folder) //disregard for now//
 - - - tiktok (folder) //disregard for now//
 - - - splits
 - - - - splitter.py = demucs stem splitter
 - - - - basicsplitter.py = simplified demucs stem splitter 
-- details (folder) //disregard for now//
-- - summarize.py //disregard for now//
+- details (folder) 
+- - summarize.py 
 - - findkey //disregard for now//
 - - findtemp //disregard for now//
+- - findtemp.py
 
 
