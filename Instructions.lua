@@ -27,4 +27,5 @@ link2aws (Main folder);
 - - findtemp //disregard for now//
 - - findtemp.py
 
-
+Virtual Environment: 
+Mac: ./MusTech/bin/Activate
