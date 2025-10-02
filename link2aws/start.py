@@ -4,8 +4,8 @@
 # 1) Check deps (report only)
 # 2) Get URL via getlink.py
 # 3) Download via methods/youtube/method1.py
-# 4) Locate the MOST RECENT NON-STEMS WAV in ~/Downloads
-# 5) Run details/findtemp.py on that WAV
+# 4) (Option B) Parse WAV_PATH from method1 output; fallback: locate most recent non-stems WAV in ~/Downloads
+# 5) Run details/findtemp.py on that WAV (via --path)
 # 6) Checkpoint: Basic or Complex stems (import + call; fallback to subprocess)
 # 7) Auto-run details/summarize.py and then complete.py
 
@@ -14,6 +14,7 @@ import sys
 import shutil
 import subprocess
 import time
+import re
 from pathlib import Path
 from typing import Optional, List, Tuple
 
@@ -78,6 +79,17 @@ def import_path_of(module_name: str) -> str:
     except Exception:
         return ""
 
+def parse_wav_path_from_text(text: str) -> Optional[str]:
+    """
+    Extracts a line like:
+      WAV_PATH: /abs/path/to/file.wav
+    from the stdout of method1.py
+    """
+    m = re.search(r"^\s*WAV_PATH:\s*(.+?)\s*$", text, re.MULTILINE)
+    if m:
+        return m.group(1)
+    return None
+
 def main():
     ROOT = Path(__file__).resolve().parent
     ensure_repo_on_syspath(ROOT)
@@ -119,30 +131,52 @@ def main():
         log(f"[getlink] failed: {e}")
         sys.exit(1)
 
-    # ---- 3) Download via method1.py
+    # ---- 3) Download via method1.py (capture output so we can parse WAV_PATH)
     method1_py = ROOT / "methods" / "youtube" / "method1.py"
     if not method1_py.is_file():
         log("[methods] method1.py not found. Aborting.")
         sys.exit(1)
     try:
-        run([py_exe, str(method1_py), url], check=True, capture_output=False, text=True)
+        proc_dl = run([py_exe, str(method1_py), url], check=True, capture_output=True, text=True)
+        # Echo method1 stdout/stderr for visibility
+        if proc_dl.stdout:
+            print(proc_dl.stdout, end="")
+        if proc_dl.stderr:
+            print(proc_dl.stderr, end="", file=sys.stderr)
         log("[methods] method1.py succeeded.")
     except subprocess.CalledProcessError as e:
+        # Echo whatever we got, then abort
+        if e.stdout:
+            print(e.stdout, end="")
+        if e.stderr:
+            print(e.stderr, end="", file=sys.stderr)
         log(f"[methods] method1.py failed: {e}")
         sys.exit(1)
 
-    # ---- 4) Locate the intended WAV (avoid stems/)
-    wav_path = newest_wav_in_downloads(dl_root, search_window_hours=24.0)
-    if not wav_path:
-        log("[findtemp] Could not find a recent .wav in Downloads. Aborting.")
-        sys.exit(1)
-    log(f"[findtemp] Using WAV: {wav_path}")
+    # ---- 4) Option B: Parse WAV_PATH from method1 output; fallback to a scan
+    wav_path_str = parse_wav_path_from_text(proc_dl.stdout or "")
+    if wav_path_str:
+        wav_path = Path(wav_path_str).expanduser().resolve()
+        log(f"[findtemp] Using WAV (from method1): {wav_path}")
+        if not wav_path.exists():
+            log("[findtemp] Parsed WAV_PATH does not exist on disk. Falling back to Downloads scan.")
+            wav_path = None  # trigger fallback
+    else:
+        log("[findtemp] Could not parse WAV_PATH from method1 output. Falling back to Downloads scan.")
+        wav_path = None
 
-    # ---- 5) Run findtemp.py on the full mix (not stem)
+    if wav_path is None:
+        wav_path = newest_wav_in_downloads(dl_root, search_window_hours=24.0)
+        if not wav_path:
+            log("[findtemp] Could not find a recent .wav in Downloads. Aborting.")
+            sys.exit(1)
+        log(f"[findtemp] Using WAV (fallback scan): {wav_path}")
+
+    # ---- 5) Run findtemp.py on the full mix with --path
     findtemp_py = ROOT / "details" / "findtemp.py"
     if findtemp_py.is_file():
         try:
-            run([py_exe, str(findtemp_py), str(wav_path)], check=False)
+            run([py_exe, str(findtemp_py), "--path", str(wav_path)], check=False, capture_output=False)
         except Exception as e:
             log(f"[findtemp] error (continuing): {e}")
     else:
