@@ -1,90 +1,72 @@
 #!/usr/bin/env python3
-import sys, shutil, subprocess, json, time
+"""
+methods/youtube/method1.py
+
+Primary downloader using yt-dlp.
+- Accepts URL via argv[1].
+- If 'yt-dlp' executable not on PATH, falls back to 'python -m yt_dlp'.
+
+Exit codes:
+  0 success
+  2 usage / missing URL
+  3 downloader failed
+"""
+
+import sys
+import os
+import shutil
+import subprocess
 from pathlib import Path
 
-def log(msg): print(msg, flush=True)
+def log(s: str):
+    print(s, flush=True)
 
-def run(cmd, capture=False):
-    log("$ " + " ".join(cmd))
-    return subprocess.run(cmd, text=True, capture_output=capture)
-
-def main(argv):
-    if not shutil.which("yt-dlp"):
-        log("[method1] yt-dlp not found on PATH")
-        return 2
-    if not shutil.which("ffmpeg"):
-        log("[method1] ffmpeg not found on PATH")
-        return 2
-    if not argv:
+def main():
+    if len(sys.argv) < 2 or not sys.argv[1].strip():
+        log("[method1] Usage: method1.py <url>")
         log("[method1] No URL passed; expecting start.py to provide it")
-        return 2
+        sys.exit(2)
 
-    url = argv[0]
-    downloads = Path.home() / "Downloads"
+    url = sys.argv[1].strip()
 
-    # 0) Get title deterministically
-    meta = run(["yt-dlp", "-J", "--no-playlist", url], capture=True)
-    if meta.returncode != 0 or not meta.stdout.strip():
-        log("[method1] Failed to read metadata (-J).")
-        if meta.stderr: log(meta.stderr.strip())
-        return 3
+    # Pick output directory: ~/Downloads/<yt_dlp_downloads>
+    out_root = Path.home() / "Downloads" / "yt_dlp_downloads"
+    out_root.mkdir(parents=True, exist_ok=True)
+
+    # Prefer yt-dlp executable; else fall back to python -m yt_dlp
+    ytdlp_exe = shutil.which("yt-dlp")
+    if ytdlp_exe:
+        cmd = [
+            ytdlp_exe,
+            "-x", "--audio-format", "wav",
+            "--audio-quality", "0",
+            "-o", str(out_root / "%(title)s.%(ext)s"),
+            url,
+        ]
+        log("[method1] Using yt-dlp executable")
+    else:
+        # fallback to python -m yt_dlp (works if yt_dlp module is installed in venv)
+        cmd = [
+            sys.executable, "-m", "yt_dlp",
+            "-x", "--audio-format", "wav",
+            "--audio-quality", "0",
+            "-o", str(out_root / "%(title)s.%(ext)s"),
+            url,
+        ]
+        log("[method1] yt-dlp not found on PATH; using 'python -m yt_dlp' fallback")
+
+    log("[method1] " + " ".join(cmd))
     try:
-        info = json.loads(meta.stdout)
-        title = info.get("title") or "YouTube_Audio"
-    except Exception as e:
-        log(f"[method1] Could not parse metadata JSON: {e}")
-        return 3
+        cp = subprocess.run(cmd, check=False)
+        if cp.returncode != 0:
+            log(f"[method1] yt-dlp exited with {cp.returncode}")
+            sys.exit(3)
+    except KeyboardInterrupt:
+        log("[method1] Aborted by user.")
+        sys.exit(130)
 
-    out_dir = downloads / title
-    out_dir.mkdir(parents=True, exist_ok=True)
-    wav_path = out_dir / f"{title}.wav"
-
-    t0 = time.time()
-
-    # 1) Download video (keep original)
-    out_tmpl_video = str(out_dir / f"{title}.%(ext)s")
-    r1 = run([
-        "yt-dlp",
-        "-f", "bv*+ba/best",
-        "-o", out_tmpl_video,
-        "--no-playlist",
-        "--merge-output-format", "mp4",
-        url,
-    ])
-    if r1.returncode != 0:
-        log("[method1] Video download failed")
-        return r1.returncode
-
-    # 2) Extract WAV
-    out_tmpl_wav = str(out_dir / f"{title}.%(ext)s")
-    r2 = run([
-        "yt-dlp",
-        "-x", "--audio-format", "wav", "--audio-quality", "0",
-        "-o", out_tmpl_wav,
-        "--no-playlist",
-        url,
-    ])
-    if r2.returncode != 0:
-        log("[method1] WAV extraction failed")
-        return r2.returncode
-
-    # 3) Verify expected path; fallback to newest after t0 if needed
-    if not wav_path.exists():
-        cands = [p for p in out_dir.rglob("*.wav") if p.stat().st_mtime >= (t0 - 5)]
-        if cands:
-            wav_path = max(cands, key=lambda p: p.stat().st_mtime)
-        else:
-            # As last resort, check Downloads recursively after t0
-            all_cands = [p for p in downloads.rglob("*.wav") if p.stat().st_mtime >= (t0 - 5)]
-            if all_cands:
-                wav_path = max(all_cands, key=lambda p: p.stat().st_mtime)
-            else:
-                log("[method1] Could not find WAV after extraction.")
-                return 3
-
-    print(f"WAV_PATH: {wav_path}")
-    log("[method1] Success")
-    return 0
+    log("[method1] Download/extract complete.")
+    sys.exit(0)
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    main()
