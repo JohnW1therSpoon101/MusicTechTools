@@ -1,0 +1,16 @@
+{
+  "input_wav": "/Users/jaydenstern/Downloads/yt_dlp_downloads/Michael Jackson - Butterflies with Lyrics.wav",
+  "stems_dir": "/Users/jaydenstern/Downloads/yt_dlp_downloads/Michael Jackson - Butterflies with Lyrics_stems",
+  "stems": [
+    "/Users/jaydenstern/Downloads/yt_dlp_downloads/Michael Jackson - Butterflies with Lyrics_stems/bass.wav",
+    "/Users/jaydenstern/Downloads/yt_dlp_downloads/Michael Jackson - Butterflies with Lyrics_stems/drums.wav",
+    "/Users/jaydenstern/Downloads/yt_dlp_downloads/Michael Jackson - Butterflies with Lyrics_stems/other.wav",
+    "/Users/jaydenstern/Downloads/yt_dlp_downloads/Michael Jackson - Butterflies with Lyrics_stems/vocals.wav"
+  ],
+  "demucs_cmd": [
+    "demucs",
+    "--out",
+    "/Users/jaydenstern/Downloads/yt_dlp_downloads/Michael Jackson - Butterflies with Lyrics_stems",
+    "/Users/jaydenstern/Downloads/yt_dlp_downloads/Michael Jackson - Butterflies with Lyrics.wav"
+  ]
+}
