@@ -1,0 +1,4 @@
+[2025-10-05_22-43-57] startdetails session: 2025-10-05_22-43-57__8f7852ba
+[root] project_root = /Users/jaydenstern/Documents/GitHub/MusicTechTools
+[path] Found getaudiofile1.py: /Users/jaydenstern/Documents/GitHub/MusicTechTools/plumming/getaudiofile1.py
+[ERROR] Could not locate details dir with findtemp(o).py and findkey.py.
