@@ -1,0 +1,5 @@
+[findkey] Analyzing: C:\Users\Jay\Downloads\MusicTechTools\Audio\Michael_Jackson_-_Butterflies_with_Lyrics.wav
+[findkey][ERROR] Essentia is required but not installed or failed to import.
+Try: pip install essentia
+More installation options: https://essentia.upf.edu/installation.html
+Original error: No module named 'essentia'

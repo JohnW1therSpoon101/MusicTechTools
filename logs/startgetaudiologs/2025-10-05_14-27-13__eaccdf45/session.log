@@ -1,0 +1,7 @@
+[2025-10-05_14-27-13] startdetails session: 2025-10-05_14-27-13__eaccdf45
+[root] project_root = C:\Users\Jay\OneDrive\Documents\GitHub\youtube2audaisplitter
+[path] Found getaudiofile1.py: C:\Users\Jay\OneDrive\Documents\GitHub\youtube2audaisplitter\plumming\getaudiofile1.py
+[path] Selected DETAILS_DIR: C:\Users\Jay\OneDrive\Documents\GitHub\youtube2audaisplitter\youtube2audwstems\details
+[use] findtemp(o).py = C:\Users\Jay\OneDrive\Documents\GitHub\youtube2audaisplitter\youtube2audwstems\details\findtemp.py
+[use] findkey.py    = C:\Users\Jay\OneDrive\Documents\GitHub\youtube2audaisplitter\youtube2audwstems\details\findkey.py
+Launched getaudiofile1.py (new terminal window should open).

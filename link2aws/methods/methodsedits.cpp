@@ -22,3 +22,12 @@ Steps:
 3) screen record tab with ffmpeg
 4) Convert the captured video to audi (WAV) 
 5) Log the final audio path
+
+.............................................
+//instamethod1.py//
+
+Instructions: 
+- takes instagram shorts link from getlink.py
+- downloads video
+- converts video to audio
+- outputs everything to downlods folder 

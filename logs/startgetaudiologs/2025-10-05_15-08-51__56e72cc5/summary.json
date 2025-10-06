@@ -1,0 +1,21 @@
+{
+  "selected_path": "C:\\Users\\Jay\\Downloads\\MusicTechTools\\Audio\\Michael_Jackson_-_Butterflies_with_Lyrics.wav",
+  "tempo": "Unknown",
+  "key": "Unknown",
+  "genre": "Unknown",
+  "resolved_paths": {
+    "project_root": "C:\\Users\\Jay\\OneDrive\\Documents\\GitHub\\youtube2audaisplitter",
+    "picker": "C:\\Users\\Jay\\OneDrive\\Documents\\GitHub\\youtube2audaisplitter\\plumming\\getaudiofile1.py",
+    "details_dir": "C:\\Users\\Jay\\OneDrive\\Documents\\GitHub\\youtube2audaisplitter\\youtube2audwstems\\details",
+    "findtempo_or_findtemp": "C:\\Users\\Jay\\OneDrive\\Documents\\GitHub\\youtube2audaisplitter\\youtube2audwstems\\details\\findtemp.py",
+    "findkey": "C:\\Users\\Jay\\OneDrive\\Documents\\GitHub\\youtube2audaisplitter\\youtube2audwstems\\details\\findkey.py"
+  },
+  "returncodes": {
+    "findtemp_or_findtempo": 1,
+    "findkey": 1
+  },
+  "timestamps": {
+    "started": "2025-10-05_15-08-51",
+    "completed": "2025-10-05_15-09-37"
+  }
+}

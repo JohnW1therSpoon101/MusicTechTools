@@ -1,269 +1,145 @@
 #!/usr/bin/env python3
-"""
-getaudiofile.py
+# getaudiofile.py — interactive audio file picker (controls at the bottom)
+# Prints: SELECTED_FILE: /absolute/path/to/file.ext
+# Also writes the same path to env MUSICTECH_PICK_OUT (if set).
 
-A simple, cross-platform terminal browser that:
-- Starts in your Downloads folder (override with --start).
-- Shows a visual layout (folders first), with pagination.
-- Lets you navigate into folders and back out.
-- Lets you filter to audio files or search by substring.
-- Prints the final chosen audio file path to stdout and logs it.
-
-Controls:
-  [number]  Open folder / select file
-  ..        Go up one folder
-  n / p     Next / previous page
-  f         Toggle "audio only" filter
-  /text     Filter by substring (case-insensitive). Use just "/" to clear.
-  r         Refresh (clear filters)
-  q         Quit without selecting
-
-Examples:
-  python getaudiofile.py
-  python getaudiofile.py --start "C:/Users/You/Downloads" --audio-only
-"""
-
-import argparse
-import os
-import sys
-import textwrap
+import os, sys
 from pathlib import Path
-from datetime import datetime
+from typing import List, Tuple
 
-AUDIO_EXTS = {
-    ".wav", ".mp3", ".m4a", ".flac", ".aiff", ".aif", ".aac",
-    ".ogg", ".oga", ".opus", ".wma"
-}
+AUDIO_EXTS = {".wav", ".mp3", ".flac", ".aiff", ".aif", ".m4a", ".ogg", ".wma", ".aac"}
+PAGE_SIZE = 20
 
-LOG_FILE = Path.cwd() / "getaudiofile.log"
-PAGE_SIZE_DEFAULT = 20
+BOLD = "\033[1m"; DIM = "\033[2m"; RESET = "\033[0m"; CYAN = "\033[36m"; YELLOW = "\033[33m"
+def bold(s): return f"{BOLD}{s}{RESET}"
+def dim(s): return f"{DIM}{s}{RESET}"
+def cyan(s): return f"{CYAN}{s}{RESET}"
+def yellow(s): return f"{YELLOW}{s}{RESET}"
 
+def human_path(p: Path) -> str:
+    return str(p).replace(str(Path.home()), "~")
 
-def log(msg: str) -> None:
-    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with LOG_FILE.open("a", encoding="utf-8") as f:
-        f.write(f"[{ts}] {msg}\n")
-
-
-def is_audio(path: Path) -> bool:
-    return path.suffix.lower() in AUDIO_EXTS
-
-
-def human_size(num_bytes: int) -> str:
-    units = ["B", "KB", "MB", "GB", "TB"]
-    size = float(num_bytes)
-    for u in units:
-        if size < 1024.0:
-            return f"{size:.1f} {u}"
-        size /= 1024.0
-    return f"{size:.1f} PB"
-
-
-def list_dir(
-    folder: Path,
-    audio_only: bool = False,
-    name_filter: str | None = None,
-    show_hidden: bool = False
-) -> list[Path]:
-    entries: list[Path] = []
+def list_dir(cur: Path, audio_only: bool) -> Tuple[List[Path], List[Path]]:
     try:
-        for p in folder.iterdir():
-            if not show_hidden and p.name.startswith("."):
-                continue
-            if name_filter and name_filter.lower() not in p.name.lower():
-                continue
-            if audio_only and p.is_file() and not is_audio(p):
-                continue
-            entries.append(p)
-    except PermissionError:
-        print("⚠️  Permission denied for this folder.")
-        return []
-    # Folders first, then files; both alphabetical
-    entries.sort(key=lambda p: (0 if p.is_dir() else 1, p.name.lower()))
-    return entries
+        items = list(cur.iterdir())
+    except Exception:
+        items = []
+    dirs = sorted([x for x in items if x.is_dir()])
+    files = sorted([x for x in items if x.is_file() and (not audio_only or x.suffix.lower() in AUDIO_EXTS)])
+    return dirs, files
 
+def print_page(dirs: List[Path], files: List[Path], page: int):
+    start = page * PAGE_SIZE
+    rows: List[Path] = dirs + files
+    if not rows:
+        print(yellow("(empty folder)"))
+        return 0
+    for i, entry in enumerate(rows[start:start+PAGE_SIZE], start=1+start):
+        tag = "[DIR] " if entry.is_dir() else "[FILE]"
+        print(f"{i:>3}  {tag} {entry.name}")
+    return len(rows)
 
-def print_header(path: Path, page_idx: int, page_size: int, total: int, audio_only: bool, name_filter: str | None):
-    os.system("cls" if os.name == "nt" else "clear")
-    title = f"📁 {str(path)}"
-    print("═" * len(title))
-    print(title)
-    print("═" * len(title))
-    filter_bits = []
-    if audio_only:
-        filter_bits.append("AudioOnly=ON")
-    if name_filter:
-        filter_bits.append(f'Filter="{name_filter}"')
-    if filter_bits:
-        print(" • " + " | ".join(filter_bits))
-    if total == 0:
-        print("\n(No items match.)\n")
-    else:
-        start = page_idx * page_size + 1
-        end = min((page_idx + 1) * page_size, total)
-        print(f"\nShowing {start}-{end} of {total} items\n")
+def default_start_dir() -> Path:
+    dl = Path.home() / "Downloads"
+    return dl if dl.exists() else Path.cwd()
 
+def controls_line():
+    # single compact line of controls — shown at the BOTTOM
+    return dim("Commands: number=open/select • u=up • n/p=next/prev • a=toggle audio/all • dl=Downloads • home=~ • q=quit")
 
-def print_entries(entries: list[Path], page_idx: int, page_size: int):
-    start = page_idx * page_size
-    end = min(start + page_size, len(entries))
-    for i, p in enumerate(entries[start:end], start=1):
-        idx = start + i  # 1-based across all pages for stable numbering
-        if p.is_dir():
-            marker = "📂"
-            info = ""
-        else:
-            marker = "🎵" if is_audio(p) else "📄"
-            try:
-                sz = human_size(p.stat().st_size)
-            except OSError:
-                sz = "?"
-            info = f"  ({sz})"
-        name = p.name
-        # Truncate very long names nicely
-        if len(name) > 90:
-            name = name[:87] + "..."
-        print(f"{idx:>4}. {marker} {name}{info}")
-    print()
-
-
-def get_downloads_path() -> Path:
-    # Cross-platform best guess for Downloads folder
-    home = Path.home()
-    candidates = [
-        home / "Downloads",
-        home / "downloads",
-    ]
-    for c in candidates:
-        if c.exists():
-            return c
-    return home  # Fallback to home if no Downloads
-
-
-def select_loop(start_path: Path, page_size: int):
-    current = start_path.resolve()
-    audio_only = False
-    name_filter: str | None = None
-    page_idx = 0
-
+def pick():
+    cur = default_start_dir()
+    audio_only = True
+    page = 0
     while True:
-        items = list_dir(current, audio_only=audio_only, name_filter=name_filter, show_hidden=False)
-        total = len(items)
+        dirs, files = list_dir(cur, audio_only)
+        total = len(dirs) + len(files)
+        pages = (total + PAGE_SIZE - 1) // PAGE_SIZE or 1
+        if page >= pages:
+            page = max(pages - 1, 0)
 
-        # Clamp page index
-        max_page = max((total - 1) // page_size, 0) if total > 0 else 0
-        page_idx = max(0, min(page_idx, max_page))
+        # header (short) — then LIST — then CONTROLS at the bottom
+        print()
+        print(cyan(bold("Locate your file..")))
+        print(f"{bold('Current:')} {human_path(cur)}   {bold('Filter:')} {'Audio only' if audio_only else 'All files'}   {bold('Page:')} {page+1}/{pages}")
+        total_rows = print_page(dirs, files, page)
 
-        print_header(current, page_idx, page_size, total, audio_only, name_filter)
-        # Always show the "up" shortcut when not at root
-        if current.parent != current:
-            print("   ..   ⬅️  Go up\n")
-        print_entries(items, page_idx, page_size)
-
-        print(textwrap.dedent("""\
-            Commands:
-              [number]  Open folder / select file
-              ..        Go up one folder
-              n / p     Next / previous page
-              f         Toggle audio-only filter
-              /text     Filter by name (use "/" alone to clear)
-              r         Refresh (clear filters)
-              q         Quit
-        """))
-
-        choice = input("> ").strip()
-
-        if choice == "":
-            continue
-        if choice.lower() == "q":
-            print("No file selected.")
-            return None
-        if choice == "..":
-            parent = current.parent
-            if parent != current:
-                current = parent
-                page_idx = 0
-            continue
-        if choice.lower() == "n":
-            if page_idx < max_page:
-                page_idx += 1
-            continue
-        if choice.lower() == "p":
-            if page_idx > 0:
-                page_idx -= 1
-            continue
-        if choice.lower() == "f":
-            audio_only = not audio_only
-            page_idx = 0
-            continue
-        if choice.lower() == "r":
-            audio_only = False
-            name_filter = None
-            page_idx = 0
-            continue
-        if choice.startswith("/"):
-            name_filter = choice[1:] or None
-            page_idx = 0
-            continue
-
-        # Numeric selection (global index across all pages)
+        # bottom controls
+        print(controls_line())
         try:
-            k = int(choice)
-        except ValueError:
-            print("Invalid input. Enter a number, '..', 'n', 'p', 'f', '/', 'r', or 'q'.")
-            input("Press Enter to continue...")
+            choice = input(bold("> ")).strip()
+        except (KeyboardInterrupt, EOFError):
+            return None
+
+        if not choice:
+            continue
+        c = choice.lower()
+
+        if c in ("q","quit","exit"):
+            return None
+        if c in ("u","up",".."):
+            if cur.parent != cur:
+                cur = cur.parent; page = 0
+            continue
+        if c in ("n","next"):
+            if page + 1 < pages: page += 1
+            continue
+        if c in ("p","prev","previous"):
+            if page > 0: page -= 1
+            continue
+        if c in ("a","all","audio"):
+            audio_only = not audio_only; page = 0
+            continue
+        if c in ("dl","downloads"):
+            dl = Path.home() / "Downloads"
+            if dl.exists():
+                cur = dl; page = 0
+            else:
+                print(yellow("Downloads folder not found."))
+            continue
+        if c in ("home","~"):
+            cur = Path.home(); page = 0
             continue
 
-        if total == 0:
-            input("No items to select. Press Enter to continue...")
-            continue
+        # direct path paste
+        p = Path(choice).expanduser()
+        if p.exists():
+            if p.is_file():
+                return p.resolve()
+            if p.is_dir():
+                cur = p.resolve(); page = 0
+                continue
 
-        # Convert 1-based global index back to list index
-        idx0 = k - 1
-        if idx0 < 0 or idx0 >= total:
-            input("Index out of range. Press Enter to continue...")
-            continue
-
-        target = items[idx0]
-        if target.is_dir():
-            current = target
-            page_idx = 0
-            continue
-        else:
-            if not is_audio(target):
-                confirm = input("Selected file is not a known audio type. Select anyway? [y/N]: ").strip().lower()
-                if confirm != "y":
+        # numeric selection
+        if c.isdigit():
+            idx = int(c)
+            if 1 <= idx <= total_rows:
+                target = (dirs + files)[idx - 1]
+                if target.is_dir():
+                    cur = target; page = 0
                     continue
-            return target.resolve()
+                if target.is_file():
+                    return target.resolve()
 
+        print(yellow("Unrecognized command."))
 
 def main():
-    parser = argparse.ArgumentParser(description="Browse and select an audio file from your Downloads (or a custom start folder).")
-    parser.add_argument("--start", type=str, default=None, help="Start folder (default: your Downloads)")
-    parser.add_argument("--page-size", type=int, default=PAGE_SIZE_DEFAULT, help=f"Items per page (default: {PAGE_SIZE_DEFAULT})")
-    parser.add_argument("--audio-only", action="store_true", help="Show only audio files")
-    args = parser.parse_args()
-
-    start = Path(args.start).expanduser().resolve() if args.start else get_downloads_path()
-    if not start.exists():
-        print(f"Start path does not exist: {start}")
-        sys.exit(2)
-
-    # Initial screen note
-    print(f"Starting in: {start}")
-    print("Loading...")
-
-    selected = select_loop(start, page_size=args.page_size)
-    if selected is None:
+    sel = pick()
+    if sel is None:
         sys.exit(1)
 
-    # Output and log
-    print(str(selected))
-    log(f"Selected audio file: {selected}")
+    # Tell the caller
+    print(f"SELECTED_FILE: {sel}")
 
+    # Also write to a temp file if provided
+    out_path = os.environ.get("MUSICTECH_PICK_OUT")
+    if out_path:
+        try:
+            Path(out_path).write_text(str(sel), encoding="utf-8")
+        except Exception:
+            pass
+
+    sys.exit(0)
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\nCancelled.")
+    main()

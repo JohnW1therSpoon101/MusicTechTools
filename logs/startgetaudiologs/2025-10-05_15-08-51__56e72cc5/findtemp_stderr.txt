@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\Jay\OneDrive\Documents\GitHub\youtube2audaisplitter\youtube2audwstems\details\findtemp.py", line 21, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
