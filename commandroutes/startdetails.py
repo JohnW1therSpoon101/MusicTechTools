@@ -7,11 +7,6 @@ Behavior:
   2) Waits until the picker finishes and reads the selected path from a temp file
   3) Runs findtemp.py and findkey.py automatically on that path
   4) Works on both macOS and Windows; sets window/tab title to "getaudiofile1.py"
-
-Anti-duplication:
-  - Uses a single-launch guard (_picker_launched.flag). If an instance has
-    already launched a picker recently and no selection has been produced yet,
-    we DO NOT launch another terminal; we just wait for the existing one.
 """
 
 import os
@@ -20,10 +15,6 @@ import subprocess
 import time
 from datetime import datetime
 from typing import Optional, List
-
-# ----------------- Tunables -----------------
-PICKER_WAIT_SECONDS = 300         # max 5 minutes waiting for selection
-LAUNCH_FLAG_TTL_SECONDS = 300     # flag considered "fresh" for 5 minutes
 
 # ----------------- Logging helpers -----------------
 def now() -> str:
@@ -47,33 +38,14 @@ def first_existing(paths: List[str]) -> Optional[str]:
     return None
 
 def find_paths(repo_root: str):
-    """
-    Find picker and details scripts across common repo layouts.
-    We search both the repo_root and its parent for resiliency,
-    and support details dirs: link2aws, link2stems, youtube2audwstems.
-    """
-    candidates_roots = [repo_root, os.path.dirname(repo_root)]
-
-    # Picker script (plumming/getaudiofile1.py)
-    picker_candidates: List[str] = []
-    for root in candidates_roots:
-        picker_candidates.append(os.path.join(root, "plumming", "getaudiofile1.py"))
-    picker = first_existing(picker_candidates)
-
-    # Details directory: try several known project names under both roots
-    details_candidates: List[str] = []
-    for root in candidates_roots:
-        details_candidates.extend([
-            os.path.join(root, "link2aws", "details"),
-            os.path.join(root, "link2stems", "details"),
-            os.path.join(root, "youtube2audwstems", "details"),
-        ])
-    details_dir = first_existing(details_candidates)
-
+    picker = first_existing([os.path.join(repo_root, "plumming", "getaudiofile1.py")])
+    details_dir = first_existing([
+        os.path.join(repo_root, "youtube2audwstems", "details"),
+        os.path.join(repo_root, "link2stems", "details"),
+    ])
     findtemp = os.path.join(details_dir, "findtemp.py") if details_dir else None
     findkey  = os.path.join(details_dir, "findkey.py")  if details_dir else None
-
-    return picker, details_dir, findtemp, findkey, picker_candidates, details_candidates
+    return picker, details_dir, findtemp, findkey
 
 # ----------------- Subprocess helpers -----------------
 def stream_subprocess(cmd, timeout=None):
@@ -95,71 +67,47 @@ def stream_subprocess(cmd, timeout=None):
             break
     return proc.returncode or 0
 
-# ----------------- Single-launch guard helpers -----------------
-def marker_paths() -> tuple[str, str]:
-    """Return (tmp_output_path, launch_flag_path) next to this script."""
-    base_dir = os.path.dirname(__file__)
-    tmp_output = os.path.join(base_dir, "_selected_path.txt")
-    launch_flag = os.path.join(base_dir, "_picker_launched.flag")
-    return tmp_output, launch_flag
-
-def write_launch_flag(path: str) -> None:
-    try:
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(f"launched_at={int(time.time())}\n")
-    except Exception:
-        pass
-
-def clear_launch_flag(path: str) -> None:
-    try:
-        if os.path.exists(path):
-            os.remove(path)
-    except Exception:
-        pass
-
-def fresh_flag_exists(path: str, ttl_seconds: int) -> bool:
-    if not os.path.exists(path):
-        return False
-    try:
-        age = time.time() - os.path.getmtime(path)
-        return age <= ttl_seconds
-    except Exception:
-        return False
-
 # ----------------- Picker launcher (external terminal with real TTY) -----------------
-def launch_picker_in_new_terminal(picker_path: str, tmp_output: str, launch_flag: str) -> None:
+def launch_picker_in_new_terminal(picker_path: str) -> Optional[str]:
     """
     Launch getaudiofile1.py in an external terminal window with a real TTY.
-    The picker writes the selected path into tmp_output (via env PICKER_OUTFILE).
-    This function ONLY launches; it does not wait. The caller will poll tmp_output.
+    The picker writes the selected path into a temp file specified by
+    the env var PICKER_OUTFILE. We poll that file from here.
     """
-    # Prepare: ensure tmp_output is clear; create/refresh the single-launch flag
+    log(f"[path] Found getaudiofile1.py: {picker_path}")
+
+    tmp_output = os.path.join(os.path.dirname(__file__), "_selected_path.txt")
     try:
         if os.path.exists(tmp_output):
             os.remove(tmp_output)
     except Exception:
         pass
-    write_launch_flag(launch_flag)
 
     if sys.platform.startswith("darwin"):
-        # macOS Terminal.app
+        # macOS Terminal.app: open a new tab/window, set the tab title via AppleScript,
+        # export PICKER_OUTFILE, then run picker interactively with a real TTY.
         title = "getaudiofile1.py"
         picker_esc = picker_path.replace('"', '\\"')
         out_esc = tmp_output.replace('"', '\\"')
+
+        # AppleScript avoids ANSI escapes; it directly sets the tab's custom title.
+        # We run a simple bash command that exports the env var and runs the picker.
+        # Note: use semicolons, not '&&', to keep it simple for AppleScript parsing.
         shell_cmd = f'export PICKER_OUTFILE=\\"{out_esc}\\"; python3 \\"{picker_esc}\\"'
+
         apple_script = (
             'tell application "Terminal"\n'
             f'    set newTab to do script "{shell_cmd}"\n'
             f'    delay 0.1\n'
             f'    set custom title of selected tab of front window to "{title}"\n'
-            '    activate\n'
             'end tell'
         )
-        log("Launching picker in macOS Terminal (single-launch)…")
+
+        log("Launching picker in macOS Terminal (with title)…")
         subprocess.Popen(["osascript", "-e", apple_script])
 
     elif os.name == "nt":
-        # Windows PowerShell
+        # Windows PowerShell: set title and env var, then run picker interactively in a new window
         title = "getaudiofile1.py"
         ps_cmd = (
             f"$host.UI.RawUI.WindowTitle = '{title}'; "
@@ -167,67 +115,49 @@ def launch_picker_in_new_terminal(picker_path: str, tmp_output: str, launch_flag
             f"python \"{picker_path}\"; "
             "exit"
         )
-        log("Launching picker in Windows PowerShell (single-launch)…")
+        log("Launching picker in Windows PowerShell (with title)…")
         subprocess.Popen(["powershell", "-NoProfile", "-Command", ps_cmd], shell=True)
 
     else:
-        # Fallback (Linux)
+        # Fallback (Linux): try gnome-terminal/konsole/xterm; if none, run inline
         env = os.environ.copy()
         env["PICKER_OUTFILE"] = tmp_output
         for term in (("gnome-terminal", "--"), ("konsole", "-e"), ("xterm", "-e")):
             if subprocess.call(f"which {term[0]}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
-                log(f"Launching picker in {term[0]} (single-launch)…")
+                log(f"Launching picker in {term[0]}…")
                 subprocess.Popen([term[0], term[1], sys.executable, picker_path], env=env)
                 break
         else:
             log("No external terminal detected; running picker inline (TTY required for curses).")
             subprocess.Popen([sys.executable, picker_path], env=env)
 
-def wait_for_picker_result(tmp_output: str, launch_flag: str, max_wait: int) -> Optional[str]:
-    """Poll for the output file written by the picker; clear flag on success/timeout."""
+    # Poll for the output file written by the picker
     log("Waiting for picker to complete…")
-    start = time.time()
-    try:
-        while True:
-            if os.path.exists(tmp_output):
-                try:
-                    with open(tmp_output, "r", encoding="utf-8") as f:
-                        path = f.read().strip()
-                except Exception:
-                    path = ""
-                if path:
-                    log(f"Picker selected: {path}")
-                    clear_launch_flag(launch_flag)
-                    return path
-            if (time.time() - start) > max_wait:
-                log("Picker timeout or no file selected.")
-                clear_launch_flag(launch_flag)
-                return None
-            time.sleep(1)
-    finally:
-        # Safety: if something weird happens, don't leave a stale flag around for long
-        if fresh_flag_exists(launch_flag, 2):  # if it was just recreated above, keep it
-            pass
+    for _ in range(180):  # up to 3 minutes
+        if os.path.exists(tmp_output):
+            try:
+                with open(tmp_output, "r", encoding="utf-8") as f:
+                    path = f.read().strip()
+            except Exception:
+                path = ""
+            if path:
+                log(f"Picker selected: {path}")
+                return path
+        time.sleep(1)
+
+    log("Picker timeout or no file selected.")
+    return None
 
 # ----------------- Main pipeline -----------------
 def main():
     repo_root = repo_root_from_here()
-    picker, details_dir, findtemp, findkey, picker_tried, details_tried = find_paths(repo_root)
-    tmp_output, launch_flag = marker_paths()
+    picker, details_dir, findtemp, findkey = find_paths(repo_root)
 
     if not picker:
         log("ERROR: getaudiofile1.py not found.")
-        log("Paths tried:")
-        for p in picker_tried:
-            log(f" - {p}")
         sys.exit(1)
-
     if not details_dir:
-        log("ERROR: details folder missing.")
-        log("Paths tried (searched repo root and its parent):")
-        for p in details_tried:
-            log(f" - {p}")
-        log('Expected one of: link2aws/details, link2stems/details, youtube2audwstems/details')
+        log("ERROR: details folder missing (expected youtube2audwstems/details or link2stems/details).")
         sys.exit(1)
 
     log(f"[path] Selected DETAILS_DIR: {details_dir}")
@@ -243,20 +173,7 @@ def main():
         findkey = None
 
     hr()
-    # ------- SINGLE-LAUNCH LOGIC -------
-    if fresh_flag_exists(launch_flag, LAUNCH_FLAG_TTL_SECONDS):
-        # A picker was already launched recently. Don't launch again; just wait.
-        log("Detected recent picker launch; NOT opening another terminal.")
-        if not os.path.exists(tmp_output):
-            log("No selection yet; waiting for the existing picker…")
-        selected_path = wait_for_picker_result(tmp_output, launch_flag, PICKER_WAIT_SECONDS)
-    else:
-        # No recent launch detected, so we launch exactly once.
-        log(f"[path] Found getaudiofile1.py: {picker}")
-        launch_picker_in_new_terminal(picker, tmp_output, launch_flag)
-        selected_path = wait_for_picker_result(tmp_output, launch_flag, PICKER_WAIT_SECONDS)
-    # -----------------------------------
-
+    selected_path = launch_picker_in_new_terminal(picker)
     if not selected_path or not os.path.exists(selected_path):
         log("No valid file selected. Exiting.")
         sys.exit(0)

@@ -1,242 +1,251 @@
 #!/usr/bin/env python3
 """
 getaudiofile1.py
+Interactive file picker focused on audio files (Windows + macOS/Linux).
 
-Cross-platform terminal file picker that launches in a NEW terminal window,
-starts in the user's Downloads folder, lets you browse folders, and choose
-a file or folder with explicit [ Open ] and [ Select ] actions.
-
-Communication back to parent:
-  - Always prints:  SELECTED_PATH=/abs/path
-  - If env PICKER_OUT=/path/to/tmp.json, writes: {"selected_path": "/abs/path"}
-
-Launcher behavior:
-  - If not in child mode, this script re-launches itself in a new terminal window and exits.
-  - Child mode runs the picker UI. On selection it exits, allowing the launcher to close the window.
-
-Key bindings (curses UI):
-  ↑/k = up, ↓/j = down
-  Enter/Right/o = [ Open ] (enter directory if highlighted is a folder)
-  s = [ Select ] (select file or folder)
-  Backspace/Left/h = go up to parent
-  q = quit without selection
-
-Fallback (Windows without curses):
-  - Presents a numbered list loop with simple prompts.
-
-Tested on: macOS (Terminal.app), Windows 10/11 (cmd.exe / PowerShell).
+- Tries to use curses TUI if available; falls back to simple menu otherwise.
+- Starts in ~/Downloads; you can navigate anywhere.
+- Prints ONE absolute file path to stdout, then exits 0 (exit 1 if canceled).
+- NEW: If env var PICKER_OUTFILE is set, also writes the same path to that file
+  so callers (e.g., startdetails.py) can read it when running in another terminal.
 """
 
 import os
 import sys
-import json
-import time
-import shutil
-import subprocess
+import traceback
 from pathlib import Path
+from typing import List, Tuple
 
-IS_CHILD = os.environ.get("PICKER_CHILD") == "1"
+# ---------- Optional curses import (Windows-safe) ----------
+HAS_CURSES = True
+try:
+    import curses  # type: ignore
+except Exception:
+    curses = None  # type: ignore
+    HAS_CURSES = False
+
+AUDIO_EXTS = {".wav", ".mp3", ".m4a", ".aac", ".flac", ".ogg", ".opus"}
 
 def downloads_dir() -> Path:
     home = Path.home()
-    candidates = [home / "Downloads", home / "downloads"]
-    for c in candidates:
-        if c.exists():
-            return c
-    return home
+    d = home / "Downloads"
+    return d if d.exists() else home
 
-def write_selection_and_exit(selected: Path):
-    abs_path = str(selected.resolve())
-    print(f"SELECTED_PATH={abs_path}", flush=True)
-    out_file = os.environ.get("PICKER_OUT")
-    if out_file:
-        try:
-            with open(out_file, "w", encoding="utf-8") as f:
-                json.dump({"selected_path": abs_path}, f)
-        except Exception as e:
-            print(f"[picker] Warning: failed to write PICKER_OUT file: {e}", file=sys.stderr)
-    time.sleep(0.15)
-    sys.exit(0)
-
-def relaunch_in_new_terminal():
-    this = Path(__file__).resolve()
-    env = os.environ.copy()
-    env["PICKER_CHILD"] = "1"
-    py = sys.executable or "python3"
-
-    if sys.platform.startswith("win"):
-        cmdline = f'"{py}" "{this}"'
-        full = ['cmd', '/c', 'start', '', 'cmd', '/c', cmdline]
-        subprocess.Popen(full, env=env, close_fds=True)
-        sys.exit(0)
-
-    elif sys.platform == "darwin":
-        osa = f'''
-        tell application "Terminal"
-            activate
-            do script "{py} {this} ; exit"
-        end tell
-        '''
-        subprocess.Popen(["osascript", "-e", osa], env=env, close_fds=True)
-        sys.exit(0)
-
-    else:
-        for term in ("gnome-terminal", "konsole", "xfce4-terminal", "xterm"):
-            if shutil.which(term):
-                if term == "gnome-terminal":
-                    subprocess.Popen([term, "--", py, str(this)], env=env, close_fds=True)
-                elif term == "konsole":
-                    subprocess.Popen([term, "-e", py, str(this)], env=env, close_fds=True)
-                elif term == "xfce4-terminal":
-                    subprocess.Popen([term, "-e", f"{py} {this}"], env=env, close_fds=True)
-                else:
-                    subprocess.Popen([term, "-e", py, str(this)], env=env, close_fds=True)
-                sys.exit(0)
-        # Fallback: no terminal found, just continue inline
-        pass
-
-def list_dir(path: Path):
+def list_dir(path: Path) -> Tuple[List[Path], List[Path]]:
     try:
         items = list(path.iterdir())
-    except PermissionError:
-        return [], []
+    except (PermissionError, FileNotFoundError):
+        items = []
     dirs = sorted([p for p in items if p.is_dir()], key=lambda p: p.name.lower())
     files = sorted([p for p in items if p.is_file()], key=lambda p: p.name.lower())
     return dirs, files
 
-def try_curses_ui():
-    try:
-        import curses
-    except Exception:
-        return False
-    start_path = downloads_dir()
-    current = start_path
+def is_audio(p: Path) -> bool:
+    return p.suffix.lower() in AUDIO_EXTS
+
+# -----------------------------
+# Curses UI (only if available)
+# -----------------------------
+def curses_picker() -> Path | None:
+    if not HAS_CURSES:
+        return None
+
+    current_path = downloads_dir().resolve()
+    selected_idx = 0
+    selected_file: Path | None = None
+
+    def build_entries(path: Path) -> List[Path]:
+        dirs, files = list_dir(path)
+        entries = []
+        if path.parent != path:
+            entries.append(path.parent)  # ".."
+        entries.extend(dirs)
+        entries.extend(files)
+        return entries
+
+    entries = build_entries(current_path)
 
     def draw(stdscr):
-        curses.curs_set(0)
-        sel_idx = 0
+        nonlocal current_path, selected_idx, selected_file, entries
+
+        try:
+            curses.curs_set(0)
+        except Exception:
+            pass
+        stdscr.nodelay(False)
+        stdscr.keypad(True)
+
         while True:
             stdscr.clear()
             height, width = stdscr.getmaxyx()
 
-            title = "File Picker — Downloads"
-            stdscr.addstr(0, 0, title[:width-1], curses.A_BOLD)
-            stdscr.addstr(1, 0, f"Current: {str(current)}"[:width-1])
+            title = " Audio File Picker "
+            try:
+                stdscr.addstr(0, max(0, (width - len(title)) // 2), title, curses.A_BOLD)
+            except Exception:
+                stdscr.addstr(0, 0, title)
 
-            btns = "[ Open ]  [ Select ]  [ Back ]  [ Quit ]"
-            stdscr.addstr(2, 0, btns[:width-1], curses.A_REVERSE)
+            path_line = f"Current: {str(current_path)}"
+            stdscr.addstr(1, 0, path_line[: max(0, width - 1)])
 
-            dirs, files = list_dir(current)
-            entries = dirs + files
+            help_line = "↑/↓ or j/k = move • Enter = open/select • Backspace = up • q = quit"
+            try:
+                stdscr.addstr(2, 0, help_line[: max(0, width - 1)], curses.A_DIM)
+            except Exception:
+                stdscr.addstr(2, 0, help_line[: max(0, width - 1)])
+
+            start_row = 4
+            visible_rows = max(1, height - start_row - 1)
+
             if not entries:
-                stdscr.addstr(4, 2, "(empty)", curses.A_DIM)
+                selected_idx = 0
             else:
-                top = 4
-                visible = height - top - 1
-                sel_idx = max(0, min(sel_idx, len(entries)-1))
-                start = max(0, sel_idx - visible + 1) if len(entries) > visible else 0
-                end = min(len(entries), start + visible)
-                for i, p in enumerate(entries[start:end], start=start):
-                    label = f"[DIR] {p.name}" if p.is_dir() else f"      {p.name}"
-                    attr = curses.A_REVERSE if i == sel_idx else curses.A_NORMAL
-                    stdscr.addstr(top + (i - start), 2, label[:width-4], attr)
+                selected_idx = max(0, min(selected_idx, len(entries) - 1))
 
-            stdscr.addstr(height-1, 0, "↑/k ↓/j  Enter/→/o=Open   s=Select   ⌫/←/h=Back   q=Quit "[:width-1], curses.A_DIM)
-            stdscr.refresh()
+            top = 0
+            if selected_idx >= visible_rows:
+                top = selected_idx - visible_rows + 1
+            window_entries = entries[top : top + visible_rows]
 
-            ch = stdscr.getch()
-            if ch in (curses.KEY_UP, ord('k')):
-                sel_idx = max(0, sel_idx - 1)
-            elif ch in (curses.KEY_DOWN, ord('j')):
-                sel_idx = min(len(dirs)+len(files)-1, sel_idx + 1) if (dirs or files) else 0
-            elif ch in (curses.KEY_LEFT, curses.KEY_BACKSPACE, 127, ord('h')):
-                parent = current.parent
-                if parent and parent != current:
-                    current = parent
-                    sel_idx = 0
-            elif ch in (curses.KEY_RIGHT, curses.KEY_ENTER, 10, 13, ord('o')):
-                entries = (list_dir(current)[0] + list_dir(current)[1])
+            for i, p in enumerate(window_entries):
+                row = start_row + i
+                is_selected = (top + i) == selected_idx
+
+                if p.is_dir():
+                    label = f"[DIR] {p.name}" if p != current_path.parent else "[UP] .."
+                else:
+                    label = f"{p.name}"
+                    if is_audio(p):
+                        label = f"[AUDIO] {label}"
+
+                label = label[: max(0, width - 2)]
+                try:
+                    if is_selected:
+                        stdscr.addstr(row, 0, label, curses.A_REVERSE)
+                    else:
+                        stdscr.addstr(row, 0, label)
+                except Exception:
+                    pass
+
+            info = f"{len(entries)} items" if entries else "Empty directory"
+            try:
+                stdscr.addstr(height - 1, 0, info[: max(0, width - 1)], curses.A_DIM)
+            except Exception:
+                stdscr.addstr(height - 1, 0, info[: max(0, width - 1)])
+
+            key = stdscr.getch()
+
+            if key in (curses.KEY_UP, ord('k')):
                 if entries:
-                    target = entries[sel_idx]
-                    if target.is_dir():
-                        current = target
-                        sel_idx = 0
-            elif ch in (ord('s'),):
-                entries = (list_dir(current)[0] + list_dir(current)[1])
+                    selected_idx = max(0, selected_idx - 1)
+            elif key in (curses.KEY_DOWN, ord('j')):
                 if entries:
-                    target = entries[sel_idx]
-                    write_selection_and_exit(target)
-            elif ch in (ord('q'), 27):
-                sys.exit(0)
+                    selected_idx = min(len(entries) - 1, selected_idx + 1)
+            elif key in (curses.KEY_BACKSPACE, 127, 8):
+                if current_path.parent != current_path:
+                    current_path = current_path.parent
+                    entries = build_entries(current_path)
+                    selected_idx = 0
+            elif key in (curses.KEY_ENTER, 10, 13):
+                if not entries:
+                    continue
+                target = entries[selected_idx]
+                if target.is_dir():
+                    current_path = target.resolve()
+                    entries = build_entries(current_path)
+                    selected_idx = 0
+                else:
+                    selected_file = target.resolve()
+                    return
+            elif key in (ord('q'), ord('Q')):
+                selected_file = None
+                return
+            else:
+                pass
 
-    import curses
-    curses.wrapper(draw)
-    return True
+    try:
+        curses.wrapper(draw)
+    except Exception:
+        sys.stderr.write("[getaudiofile1] Curses UI failed, falling back to basic menu.\n")
+        sys.stderr.write(traceback.format_exc() + "\n")
+        return None
 
-def fallback_menu_ui():
-    current = downloads_dir()
+    return selected_file
+
+# -----------------------------
+# Fallback (non-curses) UI
+# -----------------------------
+def fallback_picker() -> Path | None:
+    current_path = downloads_dir().resolve()
     while True:
-        print("\n=== File Picker — Downloads ===")
-        print(f"Current: {current}")
-        dirs, files = list_dir(current)
+        print("\n== Audio File Picker (fallback) ==")
+        print(f"Current: {current_path}")
+        dirs, files = list_dir(current_path)
 
-        numbered = []
-        idx = 1
-        if dirs:
-            print("\n[Directories]")
-            for d in dirs:
-                print(f"  {idx}. {d.name}/")
-                numbered.append(d)
-                idx += 1
-        if files:
-            print("\n[Files]")
-            for f in files:
-                print(f"  {idx}. {f.name}")
-                numbered.append(f)
-                idx += 1
+        menu: list[tuple[str, Path]] = []
+        if current_path.parent != current_path:
+            menu.append((".. (Up)", current_path.parent))
+        for d in dirs:
+            menu.append((f"[DIR] {d.name}", d))
+        for f in files:
+            tag = "[AUDIO]" if is_audio(f) else "       "
+            menu.append((f"{tag} {f.name}", f))
 
-        print("\nActions: (o) Open folder by number   (s) Select by number   (b) Back   (q) Quit")
-        choice = input("Enter action (e.g., 'o 3', 's 7', 'b'): ").strip()
+        for i, (label, _) in enumerate(menu, start=1):
+            print(f"{i:2d}. {label}")
+        print(" q. Quit")
 
+        choice = input("Select number (Enter to refresh): ").strip()
+        if choice.lower() == "q":
+            return None
         if not choice:
             continue
-        if choice.lower() == 'q':
-            sys.exit(0)
-        if choice.lower() == 'b':
-            parent = current.parent
-            if parent and parent != current:
-                current = parent
+        if not choice.isdigit():
+            print("Enter a valid number.")
             continue
 
-        parts = choice.split()
-        if len(parts) != 2 or parts[0].lower() not in ('o', 's'):
-            print("Invalid input. Example: o 3  or  s 7")
+        idx = int(choice) - 1
+        if idx < 0 or idx >= len(menu):
+            print("Out of range.")
             continue
 
-        action, num = parts[0].lower(), parts[1]
-        if not num.isdigit():
-            print("Please provide a number.")
+        target = menu[idx][1]
+        if target.is_dir():
+            current_path = target.resolve()
             continue
-        n = int(num)
-        if n < 1 or n > len(numbered):
-            print("Number out of range.")
-            continue
-
-        target = numbered[n-1]
-        if action == 'o':
-            if target.is_dir():
-                current = target
-            else:
-                print("Open only works on directories. Use 's N' to select files.")
         else:
-            write_selection_and_exit(target)
+            return target.resolve()
 
-def main():
-    if os.environ.get("PICKER_CHILD") != "1":
-        relaunch_in_new_terminal()
-    used_curses = try_curses_ui()
-    if not used_curses:
-        fallback_menu_ui()
+# -----------------------------
+# Main
+# -----------------------------
+def main() -> None:
+    prefer_curses = HAS_CURSES and sys.stdin.isatty() and sys.stdout.isatty()
+
+    selected: Path | None = None
+    if prefer_curses:
+        selected = curses_picker() or None
+
+    if selected is None:
+        selected = fallback_picker()
+
+    if selected is None:
+        sys.exit(1)
+
+    # Print absolute path
+    path_str = str(selected)
+    print(path_str)
+
+    # ALSO write to outfile if requested (for external-terminal orchestration)
+    outfile = os.environ.get("PICKER_OUTFILE", "").strip()
+    if outfile:
+        try:
+            with open(outfile, "w", encoding="utf-8") as f:
+                f.write(path_str)
+        except Exception as e:
+            sys.stderr.write(f"[getaudiofile1] WARN: Could not write PICKER_OUTFILE: {e}\n")
+
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()
