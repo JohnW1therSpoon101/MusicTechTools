@@ -1,0 +1,21 @@
+[2025-10-09 15:45:54] == startaisplitter: init ==
+[2025-10-09 15:45:54] Session log: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/logs/startaisplitterlog/20251009_154554.log
+[2025-10-09 15:45:54] Picker candidates (must be getaudiofile2.py): /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/plumming/getaudiofile2.py
+[2025-10-09 15:45:54] Using picker: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/plumming/getaudiofile2.py
+[2025-10-09 15:45:54] Checkpoint candidates: ['/Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/commandroutes/checkpoint.py']
+[2025-10-09 15:45:54] Using checkpoint: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/commandroutes/checkpoint.py
+[2025-10-09 15:45:54] Opening picker in a new terminal window...
+[2025-10-09 15:45:54] Picker command (inner shell): cd /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter; export PICKER_TEMP_PATH=/Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt; /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/musictools/bin/python /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/plumming/getaudiofile2.py --write-temp /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt; printf "\nDone. You can close this window.\n"; exec $SHELL
+[2025-10-09 15:45:54] Launching macOS Terminal via AppleScript.
+[2025-10-09 15:45:54] Waiting for selection (getaudiofile2.py)...
+[2025-10-09 15:45:54] Watching temp paths:
+  • /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt
+  • /Users/jaydenstern/Library/Application Support/MusicTechTools/tmp/selected_audio_path.txt
+  • /tmp/musictechtools_selected_audio_path.txt
+[2025-10-09 15:46:26] Detected selection at: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt
+[2025-10-09 15:46:26] Selected file: /Users/jaydenstern/Downloads/Frizzle Lofi Samples - Love/Lamp　恋人へひろがるなみだ.mp3
+[2025-10-09 15:46:26] Invalid choice. Defaulting to '1 = basic'.
+[2025-10-09 15:46:26] Splitter type: basic
+[2025-10-09 15:46:26] Launching checkpoint.py...
+[2025-10-09 15:46:26] Command: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/musictools/bin/python /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/commandroutes/checkpoint.py --input '/Users/jaydenstern/Downloads/Frizzle Lofi Samples - Love/Lamp　恋人へひろがるなみだ.mp3' --splitter basic
+[2025-10-09 15:47:19] checkpoint.py exited with code 3

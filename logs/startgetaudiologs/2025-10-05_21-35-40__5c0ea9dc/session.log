@@ -1,0 +1,7 @@
+[2025-10-05_21-35-40] startdetails session: 2025-10-05_21-35-40__5c0ea9dc
+[root] project_root = /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter
+[path] Found getaudiofile1.py: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/plumming/getaudiofile1.py
+[path] Selected DETAILS_DIR: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/youtube2audwstems/details
+[use] findtemp(o).py = /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/youtube2audwstems/details/findtemp.py
+[use] findkey.py    = /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/youtube2audwstems/details/findkey.py
+Launched getaudiofile1.py (new terminal window should open).

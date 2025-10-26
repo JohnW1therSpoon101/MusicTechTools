@@ -1,0 +1,1760 @@
+[2025-10-09 16:10:47] == startaisplitter: init ==
+[2025-10-09 16:10:47] Session log: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/logs/startaisplitterlog/20251009_161047.log
+[2025-10-09 16:10:47] Picker candidates (must be getaudiofile2.py): /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/plumming/getaudiofile2.py
+[2025-10-09 16:10:47] Using picker: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/plumming/getaudiofile2.py
+[2025-10-09 16:10:47] Checkpoint candidates: ['/Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/commandroutes/checkpoint.py']
+[2025-10-09 16:10:47] Using checkpoint: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/commandroutes/checkpoint.py
+[2025-10-09 16:10:47] Cleared stale temp file: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt
+[2025-10-09 16:10:47] Opening picker in a new terminal window...
+[2025-10-09 16:10:47] Picker command (inner shell): cd /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter; export PICKER_TEMP_PATH=/Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt; /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/musictools/bin/python /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/plumming/getaudiofile2.py --write-temp /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt; printf "\nDone. You can close this window.\n"; exec $SHELL
+[2025-10-09 16:10:47] Launching macOS Terminal via AppleScript.
+[2025-10-09 16:10:47] Waiting for selection (getaudiofile2.py)...
+[2025-10-09 16:10:47] Watching temp paths:
+  • /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt
+  • /Users/jaydenstern/Library/Application Support/MusicTechTools/tmp/selected_audio_path.txt
+  • /tmp/musictechtools_selected_audio_path.txt
+[2025-10-09 16:10:50] Detected selection at: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/.tmp/selected_audio_path.txt
+[2025-10-09 16:10:50] Selected file: /Users/jaydenstern/Downloads/Someone That I Used to Know 2.wav
+[2025-10-09 16:11:00] Splitter type: basic
+[2025-10-09 16:11:00] Selected file is already a .wav.
+[2025-10-09 16:11:00] Launching checkpoint.py...
+[2025-10-09 16:11:00] Command: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/musictools/bin/python /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/commandroutes/checkpoint.py --input '/Users/jaydenstern/Downloads/Someone That I Used to Know 2.wav' --splitter basic
+[2025-10-09 16:11:00] Running checkpoint under PTY (POSIX).
+
+------------------------------------------------------------------------
+[checkpoint] CHECKPOINT
+------------------------------------------------------------------------
+[checkpoint] OS: Darwin
+[checkpoint] MusicTechTools root: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter
+[checkpoint] Stems project root: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/youtube2audwstems
+[checkpoint] Searching for recent .wav under: /Users/jaydenstern/Downloads
+[checkpoint] Could not determine .wav automatically.
+
+[checkpoint] Paste absolute path to a .wav (or leave blank to cancel): [2025-10-09 16:11:00] PTY: answered WAV path prompt.
+/Users/jaydenstern/Downloads/Someone That I Used to Know 2.wav
+
+CHECKPOINT
+  1) Basic Stem Separation
+  2) Complex Stem Separation
+Type 1 or 2, then press Enter.
+
+> [2025-10-09 16:11:00] PTY: answered mode prompt with '1'.
+1
+
+------------------------------------------------------------------------
+[checkpoint] RUN SPLITTER (real-time)
+------------------------------------------------------------------------
+[checkpoint] Mode : Basic
+[checkpoint] Script: /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/youtube2audwstems/methods/splits/basicsplitter.py
+[checkpoint] WAV  : /Users/jaydenstern/Downloads/Someone That I Used to Know 2.wav
+[checkpoint] $ /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/musictools/bin/python /Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/youtube2audwstems/methods/splits/basicsplitter.py /Users/jaydenstern/Downloads/Someone That I Used to Know 2.wav
+[checkpoint] Running splitter... ⠋[basicsplitter] $ demucs --out /Users/jaydenstern/Downloads/Someone That I Used to Know 2_stems /Users/jaydenstern/Downloads/Someone That I Used to Know 2.wav
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[1mImportant: the default model was recently changed to `htdemucs`[0m the latest Hybrid Transformer Demucs model. In some cases, this model can actually perform worse than previous models. To get back the old default model use `-n mdx_extra_q`.
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+Selected model is a bag of 1 models. You will see that many progress bars per track.
+Separated tracks will be stored in /Users/jaydenstern/Downloads/Someone That I Used to Know 2_stems/htdemucs
+Separating track /Users/jaydenstern/Downloads/Someone That I Used to Know 2.wav
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+  0%|                                                                                  | 0.0/245.7 [00:00<?, ?seconds/s]
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+  2%|█▋                                                                       | 5.85/245.7 [00:05<03:45,  1.07seconds/s]
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[basicsplitter] Running Demucs... ⠸
+  5%|███▍                                                                     | 11.7/245.7 [00:10<03:17,  1.18seconds/s]
+[checkpoint] Running splitter... ⠼[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+  7%|████▏                                                      | 17.549999999999997/245.7 [00:14<02:55,  1.30seconds/s]
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[basicsplitter] Running Demucs... ⠋
+ 10%|██████▉                                                                  | 23.4/245.7 [00:18<02:43,  1.36seconds/s]
+[checkpoint] Running splitter... ⠙[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+ 12%|████████▌                                                               | 29.25/245.7 [00:21<02:34,  1.40seconds/s]
+[checkpoint] Running splitter... ⠏[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+ 14%|████████▍                                                  | 35.099999999999994/245.7 [00:25<02:27,  1.43seconds/s]
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+ 17%|█████████▊                                                 | 40.949999999999996/245.7 [00:29<02:23,  1.43seconds/s]
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+ 19%|█████████████▉                                                           | 46.8/245.7 [00:34<02:18,  1.43seconds/s]
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+ 21%|███████████████▍                                                        | 52.65/245.7 [00:38<02:15,  1.42seconds/s]
+[checkpoint] Running splitter... ⠴[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[basicsplitter] Running Demucs... ⠸
+ 24%|█████████████████▍                                                       | 58.5/245.7 [00:42<02:09,  1.44seconds/s]
+[checkpoint] Running splitter... ⠼[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+ 26%|██████████████████▊                                                     | 64.35/245.7 [00:46<02:06,  1.44seconds/s]
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+ 29%|█████████████████▏                                          | 70.19999999999999/245.7 [00:50<02:02,  1.44seconds/s]
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[basicsplitter] Running Demucs... ⠧
+ 31%|██████████████████████▎                                                 | 76.05/245.7 [00:54<01:57,  1.45seconds/s]
+[checkpoint] Running splitter... ⠇[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+ 33%|████████████████████                                        | 81.89999999999999/245.7 [00:58<01:51,  1.47seconds/s]
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+ 36%|█████████████████████████▋                                              | 87.75/245.7 [01:02<01:47,  1.47seconds/s]
+[checkpoint] Running splitter... ⠴[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+ 38%|███████████████████████████▊                                             | 93.6/245.7 [01:06<01:43,  1.47seconds/s]
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+ 40%|████████████████████████▎                                   | 99.44999999999999/245.7 [01:10<01:43,  1.42seconds/s]
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+ 43%|██████████████████████████████▊                                         | 105.3/245.7 [01:14<01:38,  1.42seconds/s]
+[checkpoint] Running splitter... ⠴[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+ 45%|██████████████████████████▋                                | 111.14999999999999/245.7 [01:18<01:33,  1.44seconds/s]
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[basicsplitter] Running Demucs... ⠏
+ 48%|██████████████████████████████████▎                                     | 117.0/245.7 [01:22<01:28,  1.46seconds/s]
+[checkpoint] Running splitter... ⠋[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+ 50%|███████████████████████████████████▌                                   | 122.85/245.7 [01:26<01:23,  1.47seconds/s]
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[basicsplitter] Running Demucs... ⠋
+ 52%|█████████████████████████████████████▋                                  | 128.7/245.7 [01:30<01:18,  1.49seconds/s]
+[checkpoint] Running splitter... ⠙[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+ 55%|████████████████████████████████▎                          | 134.54999999999998/245.7 [01:33<01:12,  1.53seconds/s]
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[basicsplitter] Running Demucs... ⠋
+ 57%|█████████████████████████████████▋                         | 140.39999999999998/245.7 [01:37<01:07,  1.55seconds/s]
+[checkpoint] Running splitter... ⠙[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[basicsplitter] Running Demucs... ⠧
+ 60%|██████████████████████████████████████████▎                            | 146.25/245.7 [01:41<01:03,  1.56seconds/s]
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+ 62%|████████████████████████████████████████████▌                           | 152.1/245.7 [01:44<01:00,  1.55seconds/s]
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+ 64%|█████████████████████████████████████████████▋                         | 157.95/245.7 [01:48<00:55,  1.58seconds/s]
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+ 67%|███████████████████████████████████████▎                   | 163.79999999999998/245.7 [01:52<00:52,  1.57seconds/s]
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+ 69%|████████████████████████████████████████▋                  | 169.64999999999998/245.7 [01:56<00:48,  1.56seconds/s]
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+ 71%|███████████████████████████████████████████████████▍                    | 175.5/245.7 [01:59<00:44,  1.57seconds/s]
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+ 74%|████████████████████████████████████████████████████▍                  | 181.35/245.7 [02:03<00:40,  1.57seconds/s]
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+ 76%|██████████████████████████████████████████████████████▊                 | 187.2/245.7 [02:07<00:36,  1.58seconds/s]
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+ 79%|██████████████████████████████████████████████▎            | 193.04999999999998/245.7 [02:11<00:34,  1.52seconds/s]
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[basicsplitter] Running Demucs... ⠦
+ 81%|███████████████████████████████████████████████▊           | 198.89999999999998/245.7 [02:14<00:30,  1.54seconds/s]
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[basicsplitter] Running Demucs... ⠸
+ 83%|███████████████████████████████████████████████████████████▏           | 204.75/245.7 [02:19<00:27,  1.51seconds/s]
+[checkpoint] Running splitter... ⠼[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+ 86%|█████████████████████████████████████████████████████████████▋          | 210.6/245.7 [02:22<00:23,  1.50seconds/s]
+[checkpoint] Running splitter... ⠙[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+ 88%|██████████████████████████████████████████████████████████████▌        | 216.45/245.7 [02:26<00:19,  1.51seconds/s]
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+ 90%|█████████████████████████████████████████████████████▍     | 222.29999999999998/245.7 [02:30<00:15,  1.54seconds/s]
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+ 93%|██████████████████████████████████████████████████████▊    | 228.14999999999998/245.7 [02:34<00:11,  1.51seconds/s]
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+ 95%|████████████████████████████████████████████████████████████████████▌   | 234.0/245.7 [02:39<00:08,  1.43seconds/s]
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠹[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠏[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠴[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[basicsplitter] Running Demucs... ⠧
+ 98%|█████████████████████████████████████████████████████████████████████▎ | 239.85/245.7 [02:43<00:04,  1.43seconds/s]
+100%|████████████████████████████████████████████████████████████████████████| 245.7/245.7 [02:47<00:00,  1.44seconds/s]
+100%|████████████████████████████████████████████████████████████████████████| 245.7/245.7 [02:47<00:00,  1.47seconds/s]
+[checkpoint] Running splitter... ⠇[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[basicsplitter] Running Demucs... ⠏
+/Users/jaydenstern/Documents/GitHub/youtube2audaisplitter/musictools/lib/python3.13/site-packages/torchaudio/_backend/utils.py:337: UserWarning: In 2.9, this function's implementation will be changed to use torchaudio.save_with_torchcodec` under the hood. Some parameters like format, encoding, bits_per_sample, buffer_size, and ``backend`` will be ignored. We recommend that you port your code to rely directly on TorchCodec's encoder instead: https://docs.pytorch.org/torchcodec/stable/generated/torchcodec.encoders.AudioEncoder
+  warnings.warn(
+[checkpoint] Running splitter... ⠋[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[checkpoint] Running splitter... ⠦[basicsplitter] Running Demucs... ⠴
+[checkpoint] Running splitter... ⠧[basicsplitter] Running Demucs... ⠦
+[checkpoint] Running splitter... ⠇[basicsplitter] Running Demucs... ⠧
+[checkpoint] Running splitter... ⠏[basicsplitter] Running Demucs... ⠇
+[checkpoint] Running splitter... ⠋[basicsplitter] Running Demucs... ⠏
+[checkpoint] Running splitter... ⠙[basicsplitter] Running Demucs... ⠋
+[checkpoint] Running splitter... ⠹[basicsplitter] Running Demucs... ⠙
+[checkpoint] Running splitter... ⠸[basicsplitter] Running Demucs... ⠹
+[checkpoint] Running splitter... ⠼[basicsplitter] Running Demucs... ⠸
+[checkpoint] Running splitter... ⠴[basicsplitter] Running Demucs... ⠼
+[basicsplitter]                    
+[basicsplitter] Stems saved to: /Users/jaydenstern/Downloads/Someone That I Used to Know 2_stems
+                                       [checkpoint] Stem separation completed successfully.
+[2025-10-09 16:13:52] checkpoint.py exited with code 0

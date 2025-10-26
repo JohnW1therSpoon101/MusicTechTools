@@ -1,0 +1,3 @@
+I want you to help me edit the splitter.py to ensure that the audio seperatinos are as clean as possible. 
+
+As for right now, don't generate any code, just show me ways to implement new features or methods rto increase the quality of the audio. 

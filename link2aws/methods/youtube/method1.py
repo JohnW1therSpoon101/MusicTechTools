@@ -1,224 +1,184 @@
 #!/usr/bin/env python3
 """
-YouTube audio downloader (method1)
+YouTube audio downloader (method1) — clean final-path version (no cookies)
 
-- Given a YouTube URL, downloads and extracts audio to WAV.
-- Output path pattern:
-    ~/Downloads/<Video Title>/<Video Title>.wav
+Flow:
+  1) Try yt-dlp extract ↦ WAV with --print after_move:filepath
+     • Client fallback order: web → ios → android (to avoid PO-token noise)
+  2) If that fails, download bestaudio and locally convert to WAV (if ffmpeg)
+  3) If still nothing, return newest audio file in the target folder.
 
-- Usage (CLI):
-    python method1.py <url>
+On success: prints ONE absolute path (single line), exits 0.
+On failure: prints error to stderr, exits 3.
 
-- Usage (import):
-    from method1 import download_audio
-    out_path = download_audio(url)
-
-Behavior:
-- Prints the absolute path to the resulting WAV file on success (single line).
-- Returns the absolute path as a string from functions.
+Usage:
+  method1.py <URL> [outdir]
 """
 
-import os
-import re
-import sys
-import shutil
-import subprocess
-from typing import Optional
+from __future__ import annotations
+import sys, shutil, subprocess, re
+from pathlib import Path
+from typing import Optional, List, Tuple
 
-LAST_OUTPUT_PATH: Optional[str] = None  # populated on success
+# ---------- helpers
 
-
-def _log(msg: str) -> None:
-    print(f"[method1] {msg}")
-
-
-def _find_exe(name: str) -> Optional[str]:
+def _which(name: str) -> Optional[str]:
     return shutil.which(name)
 
+def _ua() -> str:
+    return ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/127.0.0.0 Safari/537.36")
 
-def _downloads_dir() -> str:
-    # cross-platform "Downloads" (defaults to ~/Downloads)
-    home = os.path.expanduser("~")
-    dl = os.path.join(home, "Downloads")
-    return dl
+INVALID = r'[<>:"/\\|?*\x00-\x1F]'
+def _sanitize(s: str) -> str:
+    s = re.sub(INVALID, " ", s).strip()
+    s = re.sub(r"\s{2,}", " ", s)
+    return s or "YouTube_Audio"
 
-
-# sanitize folder name (avoid path separators / very problematic chars)
-_INVALID_CHARS = r'[<>:"/\\|?*\x00-\x1F]'
-def _sanitize_folder(name: str) -> str:
-    # Replace invalid characters with a space; trim extra spaces
-    cleaned = re.sub(_INVALID_CHARS, " ", name).strip()
-    # Collapse repeated spaces
-    cleaned = re.sub(r"\s{2,}", " ", cleaned)
-    return cleaned if cleaned else "YouTube_Audio"
-
-
-def _get_title_with_ytdlp(ytdlp: str, url: str) -> str:
-    """
-    Ask yt-dlp for the title only (no download).
-    """
-    # Newer yt-dlp uses -O; older accepts --print as well.
-    cmds = [
-        [ytdlp, "-O", "%(title)s", url],
-        [ytdlp, "--print", "%(title)s", url],
-    ]
-    for cmd in cmds:
+def _title(ytdlp: str, url: str) -> str:
+    for cmd in ([ytdlp, "-O", "%(title)s", url],
+                [ytdlp, "--print", "%(title)s", url]):
         try:
-            res = subprocess.run(
-                cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
-                check=False,
-            )
-            title = (res.stdout or "").strip()
-            if title:
-                return title
+            p = subprocess.run(cmd, capture_output=True, text=True, check=False)
+            t = (p.stdout or "").strip()
+            if t:
+                return t
         except Exception:
-            continue
-    # fallback generic
+            pass
     return "YouTube_Audio"
 
+def _most_recent_audio(folder: Path) -> Optional[Path]:
+    if not folder.is_dir(): return None
+    exts = {".wav", ".webm", ".m4a", ".aac", ".flac", ".ogg", ".opus", ".mp3"}
+    files = [f.resolve() for f in folder.iterdir() if f.is_file() and f.suffix.lower() in exts]
+    if not files: return None
+    files.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+    return files[0]
 
-def _build_output_template(base_dir: str, folder_name_hint: str) -> str:
-    """
-    We force yt-dlp to create: <base_dir>/<sanitized folder>/<title>.<ext>
-    Note: The inner filename still uses yt-dlp's own %(title)s so the file
-    matches the video title. The folder name uses our sanitized version.
-    """
-    folder = _sanitize_folder(folder_name_hint)
-    # Important: do NOT quote here; pass as a single string to subprocess list.
-    # yt-dlp will create the dirs.
-    return os.path.join(base_dir, folder, "%(title)s.%(ext)s")
+def _run(cmd: List[str]) -> Tuple[int, str, str]:
+    p = subprocess.run(cmd, capture_output=True, text=True)
+    return p.returncode, p.stdout or "", p.stderr or ""
 
+# ---------- yt-dlp runners
 
-def _run_ytdlp_to_wav(ytdlp: str, url: str, out_template: str) -> subprocess.CompletedProcess:
-    cmd = [
+def _dl_wav_print_final(ytdlp: str, url: str, outtmpl: str) -> Optional[Path]:
+    """Direct to WAV using --print after_move:filepath; client fallback inside."""
+    base = [
         ytdlp,
-        "-x",                       # extract audio
-        "--audio-format", "wav",    # convert to wav (requires ffmpeg)
-        "--audio-quality", "0",     # best quality
-        "-o", out_template,         # output template
+        "-x", "--audio-format", "wav", "--audio-quality", "0",
+        "--no-progress", "--force-ipv4",
+        "--user-agent", _ua(),
+        "--print", "after_move:filepath",
+        "-o", outtmpl,
         url,
     ]
-    _log("Using yt-dlp executable")
-    _log(" ".join(cmd))
-    return subprocess.run(
-        cmd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        check=False,
-    )
-
-
-# Regex to capture absolute paths to audio files (including spaces)
-_PATH_RE = re.compile(r'(/[^:\n\r\t]*?\.(?:wav|mp3|m4a|aac|flac|ogg|opus))', re.IGNORECASE)
-
-def _extract_path_from_text(s: str) -> Optional[str]:
-    if not s:
-        return None
-    matches = _PATH_RE.findall(s)
-    for cand in reversed(matches):
-        p = cand.strip().strip('"').strip("'")
-        if os.path.isabs(p) and os.path.exists(p):
-            return os.path.abspath(p)
+    for client in ("web", "ios", "android"):
+        cmd = list(base) + ["--extractor-args", f"youtube:player_client={client}"]
+        code, out, err = _run(cmd)
+        if code == 0:
+            # yt-dlp prints the final path as the last non-empty line
+            lines = [ln.strip() for ln in (out or "").splitlines() if ln.strip()]
+            if not lines:
+                continue
+            final = Path(lines[-1]).expanduser()
+            if final.is_file():
+                return final.resolve()
+        # clear cache on typical network/throttle/403 hints
+        if "HTTP Error 403" in err or "network" in err.lower() or "throttle" in err.lower():
+            _run([ytdlp, "--rm-cache-dir"])
+    # last try without extractor-args
+    code, out, _ = _run(base)
+    if code == 0:
+        lines = [ln.strip() for ln in (out or "").splitlines() if ln.strip()]
+        if lines:
+            fp = Path(lines[-1]).expanduser()
+            if fp.is_file():
+                return fp.resolve()
     return None
 
+def _dl_bestaudio_then_convert(ytdlp: str, ffmpeg: Optional[str], url: str, outtmpl: str) -> Optional[Path]:
+    base = [
+        ytdlp, "--no-progress", "--force-ipv4",
+        "--user-agent", _ua(),
+        "-f", "bestaudio/best",
+        "-o", outtmpl,
+        url,
+    ]
+    for client in ("web", "ios", "android"):
+        cmd = list(base) + ["--extractor-args", f"youtube:player_client={client}"]
+        code, out, err = _run(cmd)
+        if code == 0:
+            folder = Path(outtmpl).parent
+            src = _most_recent_audio(folder)
+            if not src:
+                continue
+            if ffmpeg:
+                wav = src.with_suffix(".wav")
+                _run([ffmpeg, "-y", "-i", str(src), "-vn",
+                      "-acodec", "pcm_s16le", "-ar", "44100", "-ac", "2", str(wav)])
+                return (wav if wav.is_file() else src).resolve()
+            return src.resolve()
+        if "HTTP Error 403" in err or "network" in err.lower() or "throttle" in err.lower():
+            _run([ytdlp, "--rm-cache-dir"])
+    # last try without extractor-args
+    code, _, _ = _run(base)
+    if code == 0:
+        folder = Path(outtmpl).parent
+        src = _most_recent_audio(folder)
+        if src:
+            if ffmpeg:
+                wav = src.with_suffix(".wav")
+                _run([ffmpeg, "-y", "-i", str(src), "-vn",
+                      "-acodec", "pcm_s16le", "-ar", "44100", "-ac", "2", str(wav)])
+                return (wav if wav.is_file() else src).resolve()
+            return src.resolve()
+    return None
 
-def _expected_wav_path(base_dir: str, folder_name_hint: str, title_for_file: str) -> str:
-    """
-    Build the expected final WAV path given base_dir and title.
-    This mirrors our -o "<base>/<folder>/<title>.%(ext)s"
-    """
-    folder = _sanitize_folder(folder_name_hint)
-    return os.path.join(base_dir, folder, f"{title_for_file}.wav")
+# ---------- main work
 
-
-def download_audio(url: str) -> str:
-    """
-    Main programmatic entrypoint.
-    Returns absolute path to the .wav file or raises RuntimeError.
-    """
-    if not url or not isinstance(url, str):
-        raise RuntimeError("No URL provided to download_audio().")
-
-    ytdlp = _find_exe("yt-dlp")
+def download_audio(url: str, outdir: Optional[Path] = None) -> Path:
+    ytdlp = _which("yt-dlp") or _which("yt_dlp")
     if not ytdlp:
         raise RuntimeError("yt-dlp not found in PATH.")
+    ffmpeg = _which("ffmpeg")  # may be None
 
-    ffmpeg = _find_exe("ffmpeg")
-    if not ffmpeg:
-        _log("Warning: ffmpeg not found; yt-dlp may fail to convert to wav.")
+    base_dir = (outdir or Path.home() / "Downloads")
+    base_dir.mkdir(parents=True, exist_ok=True)
 
-    downloads = _downloads_dir()
-    title = _get_title_with_ytdlp(ytdlp, url)
-    out_template = _build_output_template(downloads, title)
+    title = _title(ytdlp, url)
+    outtmpl = str(base_dir / _sanitize(title) / "%(title)s.%(ext)s")
+    Path(outtmpl).parent.mkdir(parents=True, exist_ok=True)
 
-    # Run yt-dlp
-    proc = _run_ytdlp_to_wav(ytdlp, url, out_template)
+    # Single pass with internal fallbacks
+    p = _dl_wav_print_final(ytdlp, url, outtmpl)
+    if p and p.is_file():
+        return p
 
-    # Echo child output for debugging visibility
-    if proc.stdout.strip():
-        print(proc.stdout, end="" if proc.stdout.endswith("\n") else "\n")
-    if proc.stderr.strip():
-        sys.stderr.write(proc.stderr if proc.stderr.endswith("\n") else proc.stderr + "\n")
+    p = _dl_bestaudio_then_convert(ytdlp, ffmpeg, url, outtmpl)
+    if p and p.is_file():
+        return p
 
-    # If yt-dlp succeeded, we can try to compute the expected path immediately.
-    # But sometimes the displayed "title" used for the filename may differ (e.g., restricted filenames).
-    # First try to detect the path from output text; then fall back to the expected path.
-    detected = _extract_path_from_text(proc.stdout) or _extract_path_from_text(proc.stderr)
+    # last resort: any audio in the target folder
+    last = _most_recent_audio(Path(outtmpl).parent)
+    if last:
+        return last.resolve()
 
-    if detected and os.path.exists(detected):
-        final_out = os.path.abspath(detected)
-        globals()["LAST_OUTPUT_PATH"] = final_out
-        print(final_out)  # single-line absolute path for caller parsing
-        return final_out
+    raise RuntimeError("method1: no file produced.")
 
-    # Fallback: check expected location with the "title" we asked yt-dlp for
-    expected = _expected_wav_path(downloads, title, title)
-    if os.path.exists(expected):
-        final_out = os.path.abspath(expected)
-        globals()["LAST_OUTPUT_PATH"] = final_out
-        print(final_out)
-        return final_out
-
-    # If we cannot find it, try scanning the created folder for a .wav
-    folder = os.path.join(downloads, _sanitize_folder(title))
-    if os.path.isdir(folder):
-        candidates = [os.path.join(folder, f) for f in os.listdir(folder) if f.lower().endswith(".wav")]
-        if candidates:
-            candidates.sort(key=lambda p: os.path.getmtime(p), reverse=True)
-            final_out = os.path.abspath(candidates[0])
-            globals()["LAST_OUTPUT_PATH"] = final_out
-            print(final_out)
-            return final_out
-
-    raise RuntimeError("Download/extract reported success but output .wav was not found.")
-
-
-def main() -> Optional[str]:
-    """
-    CLI entry: python method1.py <url>
-    Also supports env var YT2AUDIO_URL when no positional arg is given.
-    """
-    url = None
-    if len(sys.argv) >= 2:
-        url = sys.argv[1].strip()
+def main(argv: List[str]) -> int:
+    url = argv[0].strip() if len(argv) >= 1 else ""
+    outdir = Path(argv[1]).expanduser() if len(argv) >= 2 else None
     if not url:
-        url = os.environ.get("YT2AUDIO_URL", "").strip()
-
-    if not url:
-        _log("Usage: method1.py <url>")
-        _log("No URL passed; expecting start.py to provide it")
-        return None
-
+        sys.stderr.write("[method1] Usage: method1.py <url> [outdir]\n")
+        return 2
     try:
-        return download_audio(url)
+        p = download_audio(url, outdir)
+        print(str(p))  # print ONCE
+        return 0
     except Exception as e:
-        _log(f"ERROR: {e}")
-        return None
-
+        sys.stderr.write(f"[method1] ERROR: {e}\n")
+        return 3
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main(sys.argv[1:]))

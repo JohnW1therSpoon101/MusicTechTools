@@ -1,0 +1,109 @@
+# ===============================
+# 🎵 Music Separation & Audio Processing
+# ===============================
+demucs==4.0.1              # Deep learning model for music source separation (vocals, drums, bass, etc.)
+openunmix==1.3.0           # Music source separation baseline using PyTorch
+essentia==2.1b6.dev1389    # Audio and music analysis library (feature extraction, classification, etc.)
+librosa==0.11.0            # Audio analysis: spectrograms, tempo, pitch, MFCCs
+audioread==3.0.1           # Audio decoding backend for Librosa
+soundfile==0.13.1          # Read/write audio files in various formats
+soxr==1.0.0                # High-quality audio resampling
+lameenc==1.8.1             # MP3 encoder library
+audioop-lts==0.2.2         # Backport of Python audioop for modern Python versions
+simpleaudio==1.0.4         # Simple playback of WAV audio files
+
+# ===============================
+# 🧠 Machine Learning / Deep Learning
+# ===============================
+torch==2.8.0               # PyTorch deep learning framework
+torchaudio==2.8.0          # PyTorch audio processing utilities
+torchcodec==0.7.0          # Audio codec compression/decompression with PyTorch
+scikit-learn==1.7.2        # Machine learning algorithms and utilities
+numba==0.62.1              # JIT compiler to speed up numeric computations
+numpy==2.3.3               # Core numerical computing library
+scipy==1.16.2              # Scientific computing (FFT, filters, optimization)
+sympy==1.14.0              # Symbolic mathematics (algebra, calculus)
+joblib==1.5.2              # Parallel processing and model persistence for ML
+threadpoolctl==3.6.0       # Controls thread-based parallelism for ML libraries
+einops==0.8.1              # Tensor operations (reshape, reduce, rearrange)
+networkx==3.5              # Graph data structures (sometimes used in model structure)
+cloudpickle==3.1.1         # Serialization for Python objects (used by ML frameworks)
+
+# ===============================
+# 🧩 Configuration & Experiment Management
+# ===============================
+omegaconf==2.3.0           # Hierarchical configuration system for ML experiments
+submitit==1.5.3            # Job submission utility for cluster or local jobs
+dora_search==0.1.12        # Hyperparameter search and experiment management
+python-dotenv==1.1.1       # Load environment variables from a .env file
+
+# ===============================
+# 🎨 Visualization & Plotting
+# ===============================
+matplotlib==3.10.7         # Plotting and visualization
+contourpy==1.3.3           # Backend for contour plotting in matplotlib
+cycler==0.12.1             # Helper for color/style cycling in matplotlib
+kiwisolver==1.4.9          # Constraint solver used by matplotlib
+fonttools==4.60.1          # Font support for matplotlib
+tqdm==4.67.1               # Progress bars for loops and data processing
+
+# ===============================
+# ⚙️ Core Utilities / Python Enhancements
+# ===============================
+attrs==25.3.0              # Simplifies class creation and data validation
+decorator==5.2.1           # Function decorators made simple
+filelock==3.19.1           # File-based locking to prevent race conditions
+packaging==25.0            # Version handling and package metadata
+platformdirs==4.4.0        # Cross-platform directory management
+typing_extensions==4.15.0  # Backport of newer typing features
+lazy_loader==0.4           # Lazy import utility for performance
+six==1.17.0                # Python 2/3 compatibility utilities
+sortedcontainers==2.4.0    # Fast sorted list/dict/set data structures
+retrying==1.4.2            # Retry functions on failure
+PyYAML==6.0.3              # YAML parsing (configs, model metadata)
+pooch==1.8.2               # Dataset downloader and caching helper
+
+# ===============================
+# 🌐 Networking, Web, and Automation
+# ===============================
+requests==2.32.5           # HTTP requests for APIs and downloads
+urllib3==2.5.0             # HTTP connection pooling (used by requests)
+certifi==2025.8.3          # SSL certificates for HTTPS requests
+idna==3.10                 # Domain name internationalization (used by requests)
+charset-normalizer==3.4.3  # Encoding detection for HTTP responses
+PySocks==1.7.1             # SOCKS proxy support
+selenium==4.36.0           # Browser automation and web scraping
+webdriver-manager==4.0.2   # Automatically manages browser drivers for Selenium
+websocket-client==1.8.0    # WebSocket communication
+wsproto==1.2.0             # WebSocket protocol implementation
+trio==0.31.0               # Asynchronous concurrency library
+trio-websocket==0.12.2     # WebSocket support for Trio
+h11==0.16.0                # HTTP/1.1 protocol implementation
+sniffio==1.3.1             # Detects async library used (trio, asyncio)
+outcome==1.3.0.post0       # Outcome object pattern used in async code
+
+# ===============================
+# 🧱 Math, Parsing & Low-Level Utilities
+# ===============================
+cffi==2.0.0                # C foreign function interface for Python extensions
+pycparser==2.23            # C parser used by cffi
+mpmath==1.3.0              # Arbitrary-precision arithmetic
+antlr4-python3-runtime==4.9.3  # Runtime for ANTLR parser generation
+pyparsing==3.2.5           # Expression parsing for syntaxes (used in many libs)
+
+# ===============================
+# 🧰 Miscellaneous & Standard Library Backports
+# ===============================
+standard-aifc==3.13.0      # Standard audio format support (backport)
+standard-chunk==3.13.0     # Chunked data handling
+standard-sunau==3.13.0     # AU audio file format handling
+treetable==0.2.6           # Tree-structured table formatting for CLI
+msgpack==1.1.1             # Fast binary serialization
+Jinja2==3.1.6              # Templating engine for Python apps
+MarkupSafe==3.0.3          # HTML/XML escaping for Jinja2
+
+# ===============================
+# 🧩 Build System / Installer Tools
+# ===============================
+setuptools==80.9.0         # Core Python package installation tool
+pip==25.2                  # Python package manager
